@@ -1,0 +1,40 @@
+@import "compass/reset";
+@import "compass/css3";
+#easySlide{
+	$globalWidth:100%;
+	$globalHeight:800px;
+	width:$globalWidth;
+	height:$globalHeight;
+	overflow:hidden;
+	.slideItem{
+		position:absolute;
+		height:$globalHeight;
+		width:$globalWidth;
+		img{
+			width:100%;
+		}
+	}
+	$pnWidth:50px;
+	$pnHeight:200px;
+	%pn{
+		width:$pnWidth;
+		height:$pnHeight;
+		cursor: pointer;
+		background:red;
+		position:absolute;
+		top:50%;
+
+	}
+	#prev{
+		@extend %pn;
+		left:0;
+		
+		margin-top:-$pnHeight/2;
+	}
+	#next{
+		@extend %pn;
+
+		margin-top:-$pnHeight/2;
+		right:0;
+	}
+}

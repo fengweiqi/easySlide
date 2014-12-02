@@ -4,9 +4,30 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>easySlide</title>
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/easySlide.css">
 </head>
 <body>
-	
+	<div id="easySlide">
+		<div class="slideItem">
+			<img src="images/1.png">
+		</div>
+		<div class="slideItem">
+			<img src="images/2.jpg">
+		</div>
+		
+
+		<a id="prev"></a>
+		<a id="next"></a>
+
+	</div>
+	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="js/jquery.easySlide.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#easySlide").easySlide({
+			index:1
+		});
+	});
+	</script>
 </body>
 </html>
