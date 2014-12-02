@@ -41,11 +41,11 @@ date:2014-09-08
 	   	}
 	   	init();
 	    function prev(){
-	    	$slideItem.css('left',2*$globalWidth);
-	    	$slideItem.eq(opts.index).css('left',0);
-	    	var nowIndex=opts.index;
+	    	$slideItem.css('left',2*$globalWidth);//重置所有Item位置
+	    	$slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
+	    	var nowIndex=opts.index;//当前item索引
 	    	opts.index--;
-	    	opts.index=opts.index==-1?$itemLength-1:opts.index;
+	    	opts.index=opts.index==-1?$itemLength-1:opts.index;//索引循环
 	    	var prevIndex=opts.index;
 	    	slideAble=false;
 	    	$slideItem.eq(prevIndex).css('left', -$globalWidth);
@@ -55,11 +55,11 @@ date:2014-09-08
 	    	$slideItem.eq(nowIndex).animate({'left':$globalWidth,}, opts.slideTime);
 	    }
 	    function next(){
-	    	$slideItem.css('left',2*$globalWidth);
-	    	$slideItem.eq(opts.index).css('left',0);
-	    	var nowIndex=opts.index;
+	    	$slideItem.css('left',2*$globalWidth);//重置所有Item位置
+	    	$slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
+	    	var nowIndex=opts.index;//当前item索引
 	    	opts.index++;
-	    	opts.index=opts.index==$itemLength?0:opts.index;
+	    	opts.index=opts.index==$itemLength?0:opts.index;//索引循环
 	    	var nextIndex=opts.index;
 	    	slideAble=false;
 	    	$slideItem.eq(nextIndex).css('left', $globalWidth);
