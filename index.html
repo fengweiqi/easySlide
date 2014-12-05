@@ -14,7 +14,9 @@
 		<div class="slideItem">
 			<img src="images/2.jpg">
 		</div>
-		
+		<div class="slideItem">
+			<img src="images/3.png">
+		</div>
 
 		<a id="prev"></a>
 		<a id="next"></a>
@@ -25,8 +27,9 @@
 	<script type="text/javascript">
 	$(function(){
 		$("#easySlide").easySlide({
-			index:1
+			index:0
 		});
+		$("#easySlide").easySlide('showIndex',1).css('opacity',0.2);
 
 		
 		

@@ -9,10 +9,16 @@ date:2014-09-08
 ;(function($, window, document,undefined) {
 	var Privateclass = function(el) {//私有类
 			this.opts=el.data('easySlide');//获取插件参数
+			this.data=function(dataName,opts){
+				el.data(dataName,opts);
+				
+			}
 	}
 	Privateclass.prototype={
 		showIndex:function(index){
+			
 			var opts=this.opts;
+			
 			if(opts.slideAble){
 				if(index<opts.index){
 		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
@@ -22,6 +28,7 @@ date:2014-09-08
 			    	opts.index=opts.index==-1?opts.itemLength-1:opts.index;//索引循环
 			    	var runIndex=opts.index;
 			    	opts.slideAble=false;
+
 			    	opts.slideItem.eq(runIndex).css('left', -opts.globalWidth);
 			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
 			    		opts.slideAble=true;
@@ -37,6 +44,7 @@ date:2014-09-08
 			    	opts.index=opts.index==opts.itemLength?0:opts.index;//索引循环
 			    	var runIndex=opts.index;
 			    	opts.slideAble=false;
+
 			    	opts.slideItem.eq(runIndex).css('left', opts.globalWidth);
 			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
 			    		opts.slideAble=true;
@@ -44,7 +52,7 @@ date:2014-09-08
 			    	opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth}, opts.slideTime);
 			    	
 		    	}
-		        
+		        this.data('easySlide',opts);//合并运行后的数据到插件
 
 			}
 		},
@@ -57,6 +65,7 @@ date:2014-09-08
 			this.showIndex(nextIndex);
 		}
 	}
+
 	var methods = {//对外接口
 		init: function(options) {
 			return this.each(function() {
@@ -132,13 +141,29 @@ date:2014-09-08
 			});
 		},
 		prev: function() {
-			var privateclass=new Privateclass(this);
-			return privateclass.prev();
+			return $(this).each(function() {
+				var $this = $(this);
+				var privateclass=new Privateclass($this);
+					privateclass.prev();
+			});
+			
 		   
 		},
 		next:function(){
-			var privateclass=new Privateclass(this);
-			return privateclass.next();
+			return $(this).each(function() {
+				var $this = $(this);
+				var privateclass=new Privateclass(this);
+				});
+			
+			
+		},
+		showIndex:function(index){
+			return $(this).each(function(){
+				var $this = $(this);
+				var privateclass=new Privateclass($this);
+					privateclass.showIndex(index);
+			});
+			
 		}
 	};
 
