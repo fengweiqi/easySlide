@@ -8,26 +8,53 @@ date:2014-09-08
 */ 
 ;(function($, window, document,undefined) {
 	var Privateclass = function(el) {//私有类
-			this.opts=el.data('easySlide');
+			this.opts=el.data('easySlide');//获取插件参数
 	}
 	Privateclass.prototype={
-		prev:function(){
+		showIndex:function(index){
 			var opts=this.opts;
-    		if(opts.slideAble){
-    			opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
-		        opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
-		        var nowIndex=opts.index;//当前item索引
-		        opts.index--;
-		        opts.index=opts.index==-1?opts.itemLength-1:opts.index;//索引循环
-		        var prevIndex=opts.index;
-		        slideAble=false;
-		        opts.slideItem.eq(prevIndex).css('left', -opts.globalWidth);
-		        opts.slideItem.eq(prevIndex).animate({'left':0,}, opts.slideTime,function(){
-		          slideAble=true;
-		        });
-		        opts.slideItem.eq(nowIndex).animate({'left':opts.globalWidth,}, opts.slideTime);
+			if(opts.slideAble){
+				if(index<opts.index){
+		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
+			    	opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
+			    	var nowIndex=opts.index;//当前item索引
+			    	opts.index=index;
+			    	opts.index=opts.index==-1?opts.itemLength-1:opts.index;//索引循环
+			    	var runIndex=opts.index;
+			    	opts.slideAble=false;
+			    	opts.slideItem.eq(runIndex).css('left', -opts.globalWidth);
+			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
+			    		opts.slideAble=true;
+			    	});
+			    	opts.slideItem.eq(nowIndex).animate({'left':opts.globalWidth,}, opts.slideTime);
+			    	
+		    	}
+		    	else if(index>opts.index){
+		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
+			    	opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
+			    	var nowIndex=opts.index;//当前item索引
+			    	opts.index=index;
+			    	opts.index=opts.index==opts.itemLength?0:opts.index;//索引循环
+			    	var runIndex=opts.index;
+			    	opts.slideAble=false;
+			    	opts.slideItem.eq(runIndex).css('left', opts.globalWidth);
+			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
+			    		opts.slideAble=true;
+			    	});
+			    	opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth}, opts.slideTime);
+			    	
+		    	}
+		        
 
-    		};
+			}
+		},
+		prev:function(){
+			var prevIndex=this.opts.index-1;
+			this.showIndex(prevIndex);
+		},
+		next:function(){
+			var nextIndex=this.opts.index+1;
+			this.showIndex(nextIndex);
 		}
 	}
 	var methods = {//对外接口
@@ -58,6 +85,7 @@ date:2014-09-08
 				var $slideItem = $this.find('.slideItem');
 				var $itemLength = $slideItem.length;
 				var $prev=$("#prev");
+				var $next=$("#next");
 				var slideAble = true;
 				var runSettings={//插件运行时的配置
 					globalWidth:$globalWidth,
@@ -89,6 +117,11 @@ date:2014-09-08
 					return privateclass.prev();
 				});
 
+				$next.click(function(event) {
+					
+					return privateclass.next();
+				});
+
 			});
 		},
 		destroy: function() {
@@ -102,6 +135,10 @@ date:2014-09-08
 			var privateclass=new Privateclass(this);
 			return privateclass.prev();
 		   
+		},
+		next:function(){
+			var privateclass=new Privateclass(this);
+			return privateclass.next();
 		}
 	};
 

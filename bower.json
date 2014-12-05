@@ -1,0 +1,21 @@
+{
+  "name": "easyslide",
+  "version": "0.0.0",
+  "homepage": "https://github.com/fengweiqi/easySlide",
+  "authors": [
+    "fengweiqi <yakia@gm99.com>"
+  ],
+  "keywords": [
+    "jquery",
+    "easySlide"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
