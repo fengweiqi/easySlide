@@ -54,6 +54,7 @@ date:2014-09-08
 			    	
 		    	}
 		        this.data('easySlide',opts);//合并运行后的数据到插件
+		        
 
 			}
 		},
@@ -156,11 +157,15 @@ date:2014-09-08
 			return $(this).each(function(){
 				
 					privateclass.showIndex(index);
+					
 			});
 			
 		},
+		index:function(){
+					return this.data('easySlide').index;
+		},
 		test:function(){
-			console.log('test');
+			console.log(4343);
 		}
 	};
 

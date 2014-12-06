@@ -1,5 +1,4 @@
 easySlide
-sdaggg
-hhhhh
-hhhh
-jjjj
+一、使用
+$('#easySlide').easySlide();
+二、
