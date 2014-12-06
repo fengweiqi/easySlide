@@ -8,6 +8,7 @@ date:2014-09-08
 */ 
 ;(function($, window, document,undefined) {
 	var Privateclass = function(el) {//私有类
+			this.el=el;
 			this.opts=el.data('easySlide');//获取插件参数
 			this.data=function(dataName,opts){
 				el.data(dataName,opts);
@@ -20,7 +21,7 @@ date:2014-09-08
 			var opts=this.opts;
 			
 			if(opts.slideAble){
-				if(index<opts.index){
+				if(index<opts.index){//swipeRight
 		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
 			    	opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
 			    	var nowIndex=opts.index;//当前item索引
@@ -28,7 +29,7 @@ date:2014-09-08
 			    	opts.index=opts.index==-1?opts.itemLength-1:opts.index;//索引循环
 			    	var runIndex=opts.index;
 			    	opts.slideAble=false;
-
+			    	this.el.trigger('swipeLeft',opts.index);
 			    	opts.slideItem.eq(runIndex).css('left', -opts.globalWidth);
 			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
 			    		opts.slideAble=true;
@@ -36,7 +37,7 @@ date:2014-09-08
 			    	opts.slideItem.eq(nowIndex).animate({'left':opts.globalWidth,}, opts.slideTime);
 			    	
 		    	}
-		    	else if(index>opts.index){
+		    	else if(index>opts.index){//swipeLeft
 		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
 			    	opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
 			    	var nowIndex=opts.index;//当前item索引
@@ -44,7 +45,7 @@ date:2014-09-08
 			    	opts.index=opts.index==opts.itemLength?0:opts.index;//索引循环
 			    	var runIndex=opts.index;
 			    	opts.slideAble=false;
-
+			    	this.el.trigger('swipeRight',opts.index);
 			    	opts.slideItem.eq(runIndex).css('left', opts.globalWidth);
 			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
 			    		opts.slideAble=true;
@@ -64,8 +65,8 @@ date:2014-09-08
 			var nextIndex=this.opts.index+1;
 			this.showIndex(nextIndex);
 		}
-	}
-
+	};
+	var privateclass;//用于私有类实例化
 	var methods = {//对外接口
 		init: function(options) {
 			return this.each(function() {
@@ -120,7 +121,7 @@ date:2014-09-08
 					$(this).css('left', -$globalWidth * (opts.index - index));
 				});
 				
-				var privateclass=new Privateclass($this);
+				privateclass=new Privateclass($this);
 				$prev.click(function(event) {
 					
 					return privateclass.prev();
@@ -133,37 +134,33 @@ date:2014-09-08
 
 			});
 		},
-		destroy: function() {
-			return $(this).each(function() {
-				var $this = $(this);
-
-				$this.removeData('easySlide');
-			});
-		},
+		
 		prev: function() {
 			return $(this).each(function() {
-				var $this = $(this);
-				var privateclass=new Privateclass($this);
+				
 					privateclass.prev();
+
 			});
 			
 		   
 		},
 		next:function(){
 			return $(this).each(function() {
-				var $this = $(this);
-				var privateclass=new Privateclass(this);
+				
+					privateclass.next();
 				});
 			
 			
 		},
 		showIndex:function(index){
 			return $(this).each(function(){
-				var $this = $(this);
-				var privateclass=new Privateclass($this);
+				
 					privateclass.showIndex(index);
 			});
 			
+		},
+		test:function(){
+			console.log('test');
 		}
 	};
 
@@ -179,7 +176,7 @@ date:2014-09-08
 			$.error( 'Method ' +  method + ' does not exist on jQuery.easySlide' );
 			return this;
 		}
-
+		
 		return method.apply(this, arguments);
 
 	}

@@ -29,7 +29,12 @@
 		$("#easySlide").easySlide({
 			index:0
 		});
-		$("#easySlide").easySlide('showIndex',1).css('opacity',0.2);
+		$("#easySlide").on('swipeLeft',function(){
+			console.log(343);
+		});
+		$("#easySlide").easySlide('prev');
+		
+		
 
 		
 		
