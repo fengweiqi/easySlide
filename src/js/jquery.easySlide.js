@@ -3,8 +3,9 @@ name:jquery.easySlide
 verson:1.0.0
 author:fengweiqi
 email:yakia@gm99.com
+github:
 blog:fengweiqi.cn
-date:2014-09-08
+date:2014-12-07
 */ 
 ;(function($, window, document,undefined) {
 	var Privateclass = function(el) {//私有类
@@ -65,6 +66,10 @@ date:2014-09-08
 		next:function(){
 			var nextIndex=this.opts.index+1;
 			this.showIndex(nextIndex);
+		},
+		autoPlay:function(){
+			var autoIndex=this.opts.index+1;
+			this.showIndex(autoIndex);
 		}
 	};
 	var privateclass;//用于私有类实例化
@@ -98,6 +103,7 @@ date:2014-09-08
 				var $prev=$("#prev");
 				var $next=$("#next");
 				var slideAble = true;
+				var Interval;
 				var runSettings={//插件运行时的配置
 					globalWidth:$globalWidth,
 					globalHeight:$globalHeight,
@@ -132,6 +138,24 @@ date:2014-09-08
 					
 					return privateclass.next();
 				});
+
+				// 自动播放
+				Interval=setInterval(function(){
+					return privateclass.autoPlay();
+				},opts.pauseTime);
+
+				// 鼠标悬停
+
+				if(opts.hoverPause){
+					$this.hover(function() {
+						clearInterval(Interval);
+					}, function() {
+						Interval = setInterval(function() {
+							return privateclass.autoPlay();
+						}, opts.pauseTime);
+					});
+
+				}
 
 			});
 		},

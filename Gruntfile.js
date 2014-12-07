@@ -86,15 +86,8 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp'
-    },
-
-
-    // Automatically inject Bower components into the app
-   wiredep: {
-      js: {
-        src: '<%=yeoman.app %>/index.html' // point to your HTML file.
-      }
     }
+    
   });
 
 
