@@ -1,4 +1,4 @@
-easySlide
+##easySlide
 
 一、使用
 
