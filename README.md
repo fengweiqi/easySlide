@@ -22,17 +22,36 @@ $("#easySlide").easySlide({
 });
 ```
 ##Options
-slideTime
+
+###index
+
+Type: Int Default:0
+
+slider Item  which index equal this option  will diplay.
+
+###slideTime
 
 Type: Int Default:700
 
 The animate run time,the large the slower.
 
-autoPlay
+###autoPlay
 
 Type: Boolean Default:true
 
-set the slider 
+set the slider  to play auto.
+
+###pauseTime
+
+Type: Int Default:3000
+
+when the slider play auto,this option can set time between prev slider and now slider
+
+###hoverPause
+
+Type:false Default:3000
+
+when the mouse is over the slider,this option can decide the slider pause whether or not.
 
 ##Methods
 
