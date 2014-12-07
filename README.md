@@ -1,7 +1,7 @@
 ##Getting Started
 you can get easySlide plugin through two ways.
-*`npm install jquery-easyslide`
-*`bower install jquery-easyslide`
+--`npm install jquery-easyslide`
+--`bower install jquery-easyslide`
 
 ##What is easySlide?
 
