@@ -37,5 +37,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "appPath": "src",
+  "devDependencies": {
+    "jquery": "~2.1.1"
+  }
 }
