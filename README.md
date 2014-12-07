@@ -33,3 +33,7 @@ autoPlay
 Type: Boolean Default:true
 
 set the slider 
+
+##Methods
+
+##Events
