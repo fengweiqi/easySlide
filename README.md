@@ -14,11 +14,11 @@ easySlide is one jquery plugin for slider. it is easyer to use and extend.
 ####or 
 ```javascript
 $("#easySlide").easySlide({
-  slideTime:700,	//动画滑行速度，越大越慢
-  autoPlay:true,	//true为自动播放，
-  pauseTime:3000,	//动画暂停时间
-  hoverPause:false, //是否鼠标悬停,默认为false
-  index:0 //展示项目的索引
+  slideTime:700,	//Animation sliding speed, the large the slower
+  autoPlay:true,	//slider autoplay when true，
+  pauseTime:3000,	//Animation pause time
+  hoverPause:false, //Whether the hovering, the default is false
+  index:0 //show the index's slideItem
 });
 ```
 ##Options
