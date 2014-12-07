@@ -49,7 +49,7 @@ when the slider play auto,this option can set time between prev slider and now s
 
 ###hoverPause
 
-Type:false Default:3000
+Type:Boolean Default:false
 
 when the mouse is over the slider,this option can decide the slider pause whether or not.
 
@@ -59,7 +59,7 @@ acition:
 
 display the prev slider
 
-user example:
+use example:
 ```javascript
 $("#easySlide").easySlide('prev');
 ```
@@ -69,7 +69,7 @@ acition:
 
 display the next slider
 
-user example:
+use example:
 ```javascript
 $("#easySlide").easySlide('next');
 ```
@@ -79,7 +79,7 @@ argument:index
 
 acition:display the index slider
 
-user example:
+use example:
 ```javascript
 $("#easySlide").easySlide('showIndex',2);//2 is the index argument
 ```
