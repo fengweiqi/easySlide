@@ -1,6 +1,6 @@
 ##easySlide
 
-###一、使用
+###一、What is easySlide?
 
-#$('#easySlide').easySlide();
+easySlide is one jquery plugin for slider. it is easyer to use and extend.
 二、
