@@ -2,5 +2,5 @@
 
 ###一、使用
 
-$('#easySlide').easySlide();
+#$('#easySlide').easySlide();
 二、
