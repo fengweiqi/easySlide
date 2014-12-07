@@ -21,40 +21,41 @@ $("#easySlide").easySlide({
   index:0 //show the index's slideItem
 });
 ```
-##Options
+###Options
 
-###index
+####index
 
 Type: Int Default:0
 
 slider Item  which index equal this option  will diplay.
 
-###slideTime
+####slideTime
 
 Type: Int Default:700
 
 The animate run time,the large the slower.
 
-###autoPlay
+####autoPlay
 
 Type: Boolean Default:true
 
 set the slider  to play auto.
 
-###pauseTime
+####pauseTime
 
 Type: Int Default:3000
 
 when the slider play auto,this option can set time between prev slider and now slider
 
-###hoverPause
+####hoverPause
 
 Type:Boolean Default:false
 
 when the mouse is over the slider,this option can decide the slider pause whether or not.
 
-##Methods
-###prev
+###Methods
+
+####prev
 acition:
 
 display the prev slider
@@ -64,7 +65,7 @@ use example:
 $("#easySlide").easySlide('prev');
 ```
 
-###next
+####next
 acition:
 
 display the next slider
@@ -73,7 +74,7 @@ use example:
 ```javascript
 $("#easySlide").easySlide('next');
 ```
-###showIndex
+####showIndex
 
 argument:index
 
@@ -83,9 +84,9 @@ use example:
 ```javascript
 $("#easySlide").easySlide('showIndex',2);//2 is the index argument
 ```
-##Events
+###Events
 
-###swipe
+####swipe
 
 triger:
 
@@ -98,7 +99,7 @@ $("#easySlide").on('swipe',function(e,index){
    console.log(index);
 });
 ```
-###swipeLeft
+####swipeLeft
 
 triger:
 
@@ -110,7 +111,7 @@ $("#easySlide").on('swipeLeft',function(e,index){
    console.log(index);
 });
 ```
-###swipeRight
+####swipeRight
 
 triger:
 
