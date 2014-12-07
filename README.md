@@ -54,5 +54,68 @@ Type:false Default:3000
 when the mouse is over the slider,this option can decide the slider pause whether or not.
 
 ##Methods
+###prev
+acition:
+
+display the prev slider
+
+user example:
+
+$("#easySlide").easySlide('prev');
+
+###next
+acition:
+
+display the next slider
+
+user example:
+
+$("#easySlide").easySlide('next');
+
+###showIndex
+
+argument:index
+
+acition:display the index slider
+
+user example:
+
+$("#easySlide").easySlide('showIndex',2);//2 is the index argument
 
 ##Events
+
+###swipe
+
+triger:
+
+when the slider swiped it will be triger.
+
+use example:
+
+$("#easySlide").on('swipe',function(e,index){
+   console.log(index);//easySlide will return the slider index,we can recieve it through event.
+});
+
+###swipeLeft
+
+triger:
+
+when the slider swipe left  it will be triger.
+
+use example:
+
+$("#easySlide").on('swipeLeft',function(e,index){
+   console.log(index);//easySlide will return the slider index,we can recieve it through event.
+});
+
+###swipeRight
+
+triger:
+
+when the slider swipe right  it will be triger.
+
+use example:
+
+$("#easySlide").on('swipeRight',function(e,index){
+   console.log(index);//easySlide will return the slider index,we can recieve it through event.
+});
