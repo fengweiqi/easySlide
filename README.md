@@ -60,8 +60,9 @@ acition:
 display the prev slider
 
 user example:
-
+```javascript
 $("#easySlide").easySlide('prev');
+```
 
 ###next
 acition:
@@ -69,9 +70,9 @@ acition:
 display the next slider
 
 user example:
-
+```javascript
 $("#easySlide").easySlide('next');
-
+```
 ###showIndex
 
 argument:index
@@ -79,9 +80,9 @@ argument:index
 acition:display the index slider
 
 user example:
-
+```javascript
 $("#easySlide").easySlide('showIndex',2);//2 is the index argument
-
+```
 ##Events
 
 ###swipe
@@ -91,11 +92,11 @@ triger:
 when the slider swiped it will be triger.
 
 use example:
-
+```javascript
 $("#easySlide").on('swipe',function(e,index){
    console.log(index);//easySlide will return the slider index,we can recieve it through event.
 });
-
+```
 ###swipeLeft
 
 triger:
@@ -103,11 +104,11 @@ triger:
 when the slider swipe left  it will be triger.
 
 use example:
-
+```javascript
 $("#easySlide").on('swipeLeft',function(e,index){
    console.log(index);//easySlide will return the slider index,we can recieve it through event.
 });
-
+```
 ###swipeRight
 
 triger:
@@ -115,7 +116,8 @@ triger:
 when the slider swipe right  it will be triger.
 
 use example:
-
+```javascript
 $("#easySlide").on('swipeRight',function(e,index){
    console.log(index);//easySlide will return the slider index,we can recieve it through event.
 });
+```
