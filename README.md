@@ -1,9 +1,12 @@
-##easySlide
+##Getting Started
+you can get easySlide plugin through two ways.
+*`npm install jquery-easyslide`
+*`bower install jquery-easyslide`
 
-###一、What is easySlide?
+##What is easySlide?
 
 easySlide is one jquery plugin for slider. it is easyer to use and extend.
-###二、How to use
+##How to use
 ```javascript
    $("#easySlide").easySlide();
 ```
@@ -18,4 +21,4 @@ $("#easySlide").easySlide({
   index:0 //展示项目的索引
 });
 ```
-###三、OPTIONS
+##OPTIONS
