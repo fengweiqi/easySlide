@@ -21,4 +21,15 @@ $("#easySlide").easySlide({
   index:0 //展示项目的索引
 });
 ```
-##OPTIONS
+##Options
+slideTime
+
+Type: Int Default:700
+
+The animate run time,the large the slower.
+
+autoPlay
+
+Type: Boolean Default:true
+
+set the slider 
