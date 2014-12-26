@@ -1,3 +1,5 @@
+需求：
+1、幻灯展示个数，默认为1 （未完成）
 ##Getting Started
 you can get easySlide plugin through two ways.
 - Install:`npm install jquery-easyslide`
