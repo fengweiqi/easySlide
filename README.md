@@ -1,5 +1,6 @@
 需求：
 1、幻灯展示个数，默认为1 （未完成）
+2、单个换片展示添加导航（未完成）
 ##Getting Started
 you can get easySlide plugin through two ways.
 - Install:`npm install jquery-easyslide`
