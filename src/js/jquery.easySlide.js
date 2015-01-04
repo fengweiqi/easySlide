@@ -54,10 +54,20 @@ date:2014-12-07
 			    	opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth}, opts.slideTime);
 			    	
 		    	}
+		    	// 同步导航
+		    	this.setNavigator();
+		    	this.el.trigger('swipe',opts.index);
 		        this.data('easySlide',opts);//合并运行后的数据到插件
 		        
 
 			}
+		},
+		setNavigator:function(){//设置导航
+				var opts=this.opts;
+				var navigatorWidth=opts.navigator.width();
+				opts.navigator.css('margin-left',-navigatorWidth/2);
+		    	opts.navigator.find('a').removeClass('hover');
+		    	opts.navigator.find('a').eq(opts.index).addClass('hover');
 		},
 		prev:function(){
 			var prevIndex=this.opts.index-1;
@@ -70,6 +80,48 @@ date:2014-12-07
 		autoPlay:function(){
 			var autoIndex=this.opts.index+1;
 			this.showIndex(autoIndex);
+		},
+		//设置大小
+		resize:function(){
+			var $this=this.el;
+			var opts=this.opts;
+			var $autoWidth = $this.width();
+			var $responsiveImage = $this.find('.responsive');
+			
+			var $slideItem = $this.find('.slideItem');
+			var $itemLength = $slideItem.length;
+			$this.css('position','relative');
+			$slideItem.css({
+					width: $autoWidth,
+					position: 'absolute',
+					top: 0
+				});
+			$responsiveImage.eq(0).load(function() {
+				var $autoHeight = $this.find('.responsive').height();
+				$slideItem.css('height', $autoHeight);
+				$this.css({
+					height: $autoHeight
+
+				});
+			});
+			var $autoHeight = $this.find('.responsive').height();
+			$slideItem.css('height', $autoHeight);
+				$this.css({
+					height: $autoHeight
+
+				});
+			$slideItem.eq(opts.index).css({
+				left: 0
+			});
+
+
+			$slideItem.each(function(index, el) {
+				$(this).css('left', -$autoWidth * (opts.index - index));
+			});
+			
+			
+		    // 同步导航
+		    	this.setNavigator();
 		}
 	};
 	var privateclass;//用于私有类实例化
@@ -85,7 +137,8 @@ date:2014-12-07
 						    autoPlay:true,	//true为自动播放，
 						    pauseTime:3000,	//动画暂停时间
 						    hoverPause:false, //是否鼠标悬停,默认为false
-						    index:0 //展示项目的索引
+						    index:0, //展示项目的索引
+						    autoReSize:true //是否自适应
 					   };
 
 					opts = $.extend({}, defaults, options);
@@ -102,6 +155,7 @@ date:2014-12-07
 				var $itemLength = $slideItem.length;
 				var $prev=$("#prev");
 				var $next=$("#next");
+				var $navigator=$("#navigator");
 				var slideAble = true;
 				var Interval;
 				var runSettings={//插件运行时的配置
@@ -109,26 +163,15 @@ date:2014-12-07
 					globalHeight:$globalHeight,
 					slideItem:$slideItem,
 					itemLength:$itemLength,
-					slideAble:slideAble
+					slideAble:slideAble,
+					navigator:$navigator
 
 				}
 				opts = $.extend({}, opts, runSettings);
 				$this.data('easySlide', opts);
-				$this.css('position', 'relative');
-				$slideItem.css({
-					width: $globalWidth,
-					height: $globalHeight,
-					position: 'absolute',
-					top: 0
-				});
-				$slideItem.eq(opts.index).css({
-					left: 0
-				});
-				$slideItem.each(function(index, el) {
-					$(this).css('left', -$globalWidth * (opts.index - index));
-				});
-				
 				privateclass=new Privateclass($this);
+				privateclass.resize();
+
 				$prev.click(function(event) {
 					
 					return privateclass.prev();
@@ -156,6 +199,23 @@ date:2014-12-07
 					});
 
 				}
+
+				// 自适应
+				if(opts.autoReSize){
+					window.onresize=function(){
+						return privateclass.resize();
+					}
+				}
+
+				// 导航
+
+				$navigator.find('a').click(function(event) {
+					$navigator.find('a').removeClass('circle_hover');
+					$(this).addClass('circle_hover');
+					var index=$navigator.find('a').index(this);
+					console.log(index);
+					return privateclass.showIndex(index);
+				});
 
 			});
 		},

@@ -1,5 +1,5 @@
-@import "compass/reset";
-@import "compass/css3";
+@charset "utf-8";
+@import "CCS/common/common";
 #easySlide{
 	$globalWidth:100%;
 	$globalHeight:800px;
@@ -36,5 +36,31 @@
 
 		margin-top:-$pnHeight/2;
 		right:0;
+	}
+
+	// 轮播条目
+	#navigator{
+		position:absolute;
+		bottom:10%;
+		left:50%;
+
+		ul{
+			@include inline-block;
+			@extend %clearfix;
+			li{
+				float:left;
+				margin-right:2em;
+				a{
+					@include inline-block;
+					width:10px;
+					height:10px;
+					background:green;
+					cursor: pointer;
+					&:hover,&.hover{
+						background:yellow;
+					}
+				}
+			}
+		}
 	}
 }
