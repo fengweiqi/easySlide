@@ -2,13 +2,13 @@
 @import "CCS/common/common";
 #easySlide{
 	$globalWidth:100%;
-	$globalHeight:800px;
+	$globalHeight:600px;
 	width:$globalWidth;
 	height:$globalHeight;
 	overflow:hidden;
 	.slideItem{
 		position:absolute;
-		height:$globalHeight;
+		
 		width:$globalWidth;
 		img{
 			width:100%;
