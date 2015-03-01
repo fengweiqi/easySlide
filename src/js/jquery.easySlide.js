@@ -20,39 +20,23 @@ date:2014-12-07
 		showIndex:function(index){
 			
 			var opts=this.opts;
-			
 			if(opts.slideAble){
-				if(index<opts.index){//swipeRight
-		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
-			    	opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
-			    	var nowIndex=opts.index;//当前item索引
-			    	opts.index=index;
-			    	opts.index=opts.index==-1?opts.itemLength-1:opts.index;//索引循环
-			    	var runIndex=opts.index;
-			    	opts.slideAble=false;
-			    	this.el.trigger('swipeLeft',opts.index);
-			    	opts.slideItem.eq(runIndex).css('left', -opts.globalWidth);
-			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
-			    		opts.slideAble=true;
-			    	});
-			    	opts.slideItem.eq(nowIndex).animate({'left':opts.globalWidth,}, opts.slideTime);
+				if(index<opts.index){//swipeRight,swipeDown
+					if(opts.derection=='h'){
+						this.swipeRight(opts,index);
+					}else{
+						this.swipeDown(opts,index);
+
+					}
+		    		
 			    	
 		    	}
-		    	else if(index>opts.index){//swipeLeft
-		    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
-			    	opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
-			    	var nowIndex=opts.index;//当前item索引
-			    	opts.index=index;
-			    	opts.index=opts.index==opts.itemLength?0:opts.index;//索引循环
-			    	var runIndex=opts.index;
-			    	opts.slideAble=false;
-			    	this.el.trigger('swipeRight',opts.index);
-			    	opts.slideItem.eq(runIndex).css('left', opts.globalWidth);
-			    	opts.slideItem.eq(runIndex).animate({'left':0,}, opts.slideTime,function(){
-			    		opts.slideAble=true;
-			    	});
-			    	opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth}, opts.slideTime);
-			    	
+		    	else if(index>opts.index){//swipeLeft,swipeUp
+		    		if(opts.derection=='h'){
+						this.swipeLeft(opts,index);
+					}else{
+						this.swipeUp(opts,index);
+					}
 		    	}
 		    	// 同步导航
 		    	this.setNavigator();
@@ -62,6 +46,87 @@ date:2014-12-07
 
 			}
 		},
+		/*
+		opts:easySlide参数
+		index:要滑动到的索引
+		derection:滑动方向
+		*/
+
+		swipe:function(opts,index,derection){
+			if(derection=='left'||derection=='right'){
+	    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
+	    		opts.slideItem.eq(opts.index).css('left',0);//保持当前Item位置不变
+	    	}else if(derection=='up'||derection=='down'){
+	    		opts.slideItem.css('top',2*opts.globalHeight);//重置所有Item位置
+	    		opts.slideItem.eq(opts.index).css('top',0);//保持当前Item位置不变
+	    	}
+
+	    	var nowIndex=opts.index;//当前item索引
+	    	opts.index=index;
+	    	if(derection=='left'||derection=='up'){
+	    		opts.index=opts.index==opts.itemLength?0:opts.index;//索引循环
+	    	}else if(derection=='right'||derection=='down'){
+	    		opts.index=opts.index==-1?opts.itemLength-1:opts.index;//索引循环
+	    	}
+	    	var runIndex=opts.index;
+	    	opts.slideAble=false;
+	    	switch(derection){
+	    		case 'left':this.el.trigger('swipeLeft',opts.index);break;
+	    		case 'right':this.el.trigger('swipeRight',opts.index);break;
+	    		case 'up':this.el.trigger('swipeUp',opts.index);break;
+	    		case 'down':this.el.trigger('swipeDown',opts.index);break;
+	    	}
+
+	    	switch(derection){
+	    		case 'left':opts.slideItem.eq(runIndex).css('left', opts.globalWidth);break;
+	    		case 'right':opts.slideItem.eq(runIndex).css('left', -opts.globalWidth);break;
+	    		case 'up':opts.slideItem.eq(runIndex).css('top', opts.globalHeight);break;
+	    		case 'down':opts.slideItem.eq(runIndex).css('top', -opts.globalHeight);;break;
+	    	}
+	    	if(derection=='left'||derection=='right'){
+	    		opts.slideItem.eq(runIndex).animate({'left':0}, opts.slideTime,function(){
+	    			opts.slideAble=true;
+	    		});
+	    	}else if(derection=='up'||derection=='down'){
+	    		opts.slideItem.eq(runIndex).animate({'top':0}, opts.slideTime,function(){
+	    			opts.slideAble=true;
+	    		});
+	    	}
+
+	    	switch(derection){
+	    		case 'left':
+	    		opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth},opts.slideTime);
+	    		break;
+	    		case 'right':
+	    		opts.slideItem.eq(nowIndex).animate({'left':opts.globalWidth,}, opts.slideTime);
+	    		break;
+	    		case 'up':
+	    		opts.slideItem.eq(nowIndex).animate({'top':-opts.globalHeight}, opts.slideTime);
+	    		break;
+	    		case 'down':
+
+	    		opts.slideItem.eq(nowIndex).animate({'top':opts.globalHeight}, opts.slideTime);
+	    		break;
+	    	}
+	    	
+		},
+		// 左滑动
+		swipeLeft:function(opts,index) {
+			this.swipe(opts,index,'left');
+		},
+		// 右滑动
+		swipeRight:function(opts,index){
+			this.swipe(opts,index,'right');
+		},
+		// 向上滑动
+		swipeUp:function(opts,index){
+			this.swipe(opts,index,'up');
+		},
+		// 向下滑动
+		swipeDown:function(opts,index){
+			this.swipe(opts,index,'down');
+		},
+		
 		setNavigator:function(){//设置导航
 				var opts=this.opts;
 				var navigatorWidth=opts.navigator.width();
@@ -86,47 +151,82 @@ date:2014-12-07
 			var $this=this.el;
 			var opts=this.opts;
 			var $autoWidth = $this.width();
+			var $autoHeight = $this.height();
+			console.log($autoHeight);
 			var $responsiveImage = $this.find('.responsive');
-			
 			var $slideItem = $this.find('.slideItem');
 			var $itemLength = $slideItem.length;
+			var firstImg=$responsiveImage.eq(0);
 			$this.css('position','relative');
-			$slideItem.css({
+
+			// 设置高度
+			function setHeight(){
+				if(opts.initHeight==0){
+					$autoHeight = $autoWidth*opts.rate;
+					opts.globalHeight=$autoHeight;
+				}
+
+				$slideItem.css('height', $autoHeight);
+				$this.css({
+					height: $autoHeight
+				});
+			}
+			// 设置宽度
+			function setWidth(){
+				$slideItem.css({
 					width: $autoWidth,
 					position: 'absolute',
 					top: 0
 				});
-			$responsiveImage.eq(0).load(function() {
-				var $autoHeight = $this.find('.responsive').height();
-				$slideItem.css('height', $autoHeight);
-				$this.css({
-					height: $autoHeight
-
-				});
-			});
-			var $autoHeight = $this.find('.responsive').height();
-			$slideItem.css('height', $autoHeight);
-				$this.css({
-					height: $autoHeight
-
-				});
-			$slideItem.eq(opts.index).css({
-				left: 0
-			});
-
-
-			$slideItem.each(function(index, el) {
-				$(this).css('left', -$autoWidth * (opts.index - index));
-			});
+			}
 			
+			//重置幻灯位置
+			function resetPosition(){
+				if(opts.derection=='h'){//水平滑动幻灯重置
+					$slideItem.eq(opts.index).css({
+						left: 0
+					});
+					$slideItem.each(function(index, el) {
+						$(this).css('left', -$autoWidth * (opts.index - index));
+					});
+				}else{//垂直滑动幻灯重置
+					$slideItem.eq(opts.index).css({
+						top: 0
+					});
+					$slideItem.each(function(index, el) {
+						$(this).css('top', -$autoHeight * (opts.index - index));
+					});
+				}
+			}
+			// 随着图片自适应
+			firstImg.load(function(){
+				opts.slideAble=true;
+				var width=$(this).width();
+				var height=$(this).height();
+				opts.rate=height/width;
+				setHeight();
+				resetPosition();
+			});
+
+			// 如果不是以图片为自适应，而是固定高度
+			if(typeof firstImg=='undefined'){
+				opts.slideAble=true;
+			}
+
+			setHeight();
+
+			setWidth();
+
+			resetPosition();
 			
 		    // 同步导航
-		    	this.setNavigator();
+		    this.setNavigator();
+		    this.data('easySlide',opts);//合并变化后数据到插件
 		}
 	};
 	var privateclass;//用于私有类实例化
 	var methods = {//对外接口
-		init: function(options) {
+		init: function(options){
 			return this.each(function() {
 				var $this = $(this);
 				var opts = $this.data('easySlide');
@@ -138,7 +238,8 @@ date:2014-12-07
 						    pauseTime:3000,	//动画暂停时间
 						    hoverPause:false, //是否鼠标悬停,默认为false
 						    index:0, //展示项目的索引
-						    autoReSize:true //是否自适应
+						    autoReSize:true, //是否自适应
+						    derection:'h'//h水平滑动，v垂直方向滑动
 					   };
 
 					opts = $.extend({}, defaults, options);
@@ -156,27 +257,31 @@ date:2014-12-07
 				var $prev=$("#prev");
 				var $next=$("#next");
 				var $navigator=$("#navigator");
-				var slideAble = true;
+				var $vNavigator=$("#vNavigator");
+				var slideAble = false;
 				var Interval;
 				var runSettings={//插件运行时的配置
-					globalWidth:$globalWidth,
-					globalHeight:$globalHeight,
-					slideItem:$slideItem,
-					itemLength:$itemLength,
-					slideAble:slideAble,
-					navigator:$navigator
+						globalWidth:$globalWidth,
+						globalHeight:$globalHeight,
+						initHeight:$globalHeight,//初始高度
+						slideItem:$slideItem,
+						itemLength:$itemLength,
+						slideAble:slideAble,
+						navigator:$navigator,
+						vNavigator:$vNavigator,
+						rate:null	//图片高宽比
 
 				}
 				opts = $.extend({}, opts, runSettings);
-				$this.data('easySlide', opts);
+				$this.data('easySlide', opts);//合并参数
 				privateclass=new Privateclass($this);
 				privateclass.resize();
-
+				// 播放上一张
 				$prev.click(function(event) {
 					
 					return privateclass.prev();
 				});
-
+				// 播放下一张
 				$next.click(function(event) {
 					
 					return privateclass.next();
@@ -207,15 +312,25 @@ date:2014-12-07
 					}
 				}
 
-				// 导航
+				// 水平导航
 
 				$navigator.find('a').click(function(event) {
-					$navigator.find('a').removeClass('circle_hover');
-					$(this).addClass('circle_hover');
+					$navigator.find('a').removeClass('hover');
+					$(this).addClass('hover');
 					var index=$navigator.find('a').index(this);
 					console.log(index);
 					return privateclass.showIndex(index);
 				});
+
+				// 垂直导航
+				$vNavigator.find('.vItem').click(function(event) {
+					$vNavigator.find('.vItem').removeClass('hover');
+					$(this).addClass('hover');
+					var index=$vNavigator.find('.vItem').index(this);
+					console.log(index);
+					return privateclass.showIndex(index);
+				});
+
 
 			});
 		},
