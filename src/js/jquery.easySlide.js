@@ -46,12 +46,13 @@ date:2014-12-07
 
 			}
 		},
-		/*
-		opts:easySlide参数
-		index:要滑动到的索引
-		derection:滑动方向
-		*/
-
+		
+/**
+ * [swipe 滑动函数]
+ * @param  {[type]}   opts      [插件参数]
+ * @param  {[type]}   index     [要滑动到的索引]
+ * @param  {[type]}   derection [滑动方向]
+ */
 		swipe:function(opts,index,derection){
 			if(derection=='left'||derection=='right'){
 	    		opts.slideItem.css('left',2*opts.globalWidth);//重置所有Item位置
@@ -95,7 +96,11 @@ date:2014-12-07
 
 	    	switch(derection){
 	    		case 'left':
-	    		opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth},opts.slideTime);
+	    		opts.slideItem.eq(nowIndex).animate({'left':-opts.globalWidth},opts.slideTime,function(){
+	    			if(typeof callback==='function'){
+	    				callback();
+	    			}
+	    		});
 	    		break;
 	    		case 'right':
 	    		opts.slideItem.eq(nowIndex).animate({'left':opts.globalWidth,}, opts.slideTime);
@@ -143,8 +148,11 @@ date:2014-12-07
 			this.showIndex(nextIndex);
 		},
 		autoPlay:function(){
-			var autoIndex=this.opts.index+1;
-			this.showIndex(autoIndex);
+			var opts=this.opts;
+			if(opts.autoPlay){
+				var autoIndex=this.opts.index+1;
+				this.showIndex(autoIndex);	
+				}
 		},
 		//设置大小
 		resize:function(){
@@ -152,17 +160,23 @@ date:2014-12-07
 			var opts=this.opts;
 			var $autoWidth = $this.width();
 			var $autoHeight = $this.height();
-			console.log($autoHeight);
+
+
 			var $responsiveImage = $this.find('.responsive');
+
 			var $slideItem = $this.find('.slideItem');
 			var $itemLength = $slideItem.length;
-			var firstImg=$responsiveImage.eq(0);
+			var firstImg=$responsiveImage.get(0);
+
+
 			$this.css('position','relative');
 
 			// 设置高度
 			function setHeight(){
 				if(opts.initHeight==0){
 					$autoHeight = $autoWidth*opts.rate;
+					
+					
 					opts.globalHeight=$autoHeight;
 				}
 
@@ -199,14 +213,19 @@ date:2014-12-07
 				}
 			}
 			// 随着图片自适应
-			firstImg.load(function(){
-				opts.slideAble=true;
-				var width=$(this).width();
-				var height=$(this).height();
-				opts.rate=height/width;
+			if(opts.rate==null){
+				// Create new offscreen image to test
+				var theImage = new Image();
+				theImage.src = $(firstImg).attr("src");
+				// Get accurate measurements from that.
+				var imageWidth = theImage.width;
+				var imageHeight = theImage.height;
+				opts.slideAble=true;	
+				opts.rate=imageHeight/imageWidth;
 				setHeight();
 				resetPosition();
-			});
+			}
+			
 
 			// 如果不是以图片为自适应，而是固定高度
 			if(typeof firstImg=='undefined'){
@@ -288,6 +307,7 @@ date:2014-12-07
 				});
 
 				// 自动播放
+
 				Interval=setInterval(function(){
 					return privateclass.autoPlay();
 				},opts.pauseTime);
