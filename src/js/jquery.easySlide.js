@@ -359,7 +359,7 @@ date:2014-12-07
 		
 		prev: function() {
 			return $(this).each(function() {
-				
+					var opts = $(this).data('easySlide');
 					privateclass[opts.id].prev();
 
 			});
@@ -368,7 +368,7 @@ date:2014-12-07
 		},
 		next:function(){
 			return $(this).each(function() {
-				
+					var opts = $(this).data('easySlide');
 					privateclass[opts.id].next();
 				});
 			
@@ -376,7 +376,7 @@ date:2014-12-07
 		},
 		showIndex:function(index){
 			return $(this).each(function(){
-				
+					var opts = $(this).data('easySlide');
 					privateclass[opts.id].showIndex(index);
 					
 			});
