@@ -10,23 +10,32 @@
 	<div id="easySlide">
 		<!-- 轮播条目 -->
 		<div class="slideItem">
-			<img src="images/1.png">
+			<img src="images/1.jpg" class="responsive">
 		</div>
 		<div class="slideItem">
-			<img src="images/2.jpg">
+			<img src="images/2.jpg" class="responsive">
 		</div>
 		<div class="slideItem">
-			<img src="images/3.png">
+			<img src="images/3.jpg" class="responsive">
 		</div>
 		<!-- 上下张 -->
 		<a id="prev"></a>
 		<a id="next"></a>
+
 		<!-- 导航 -->
 		<div id="navigator">
 				<ul>
-					<li><a ></a></li>
-					<li><a ></a></li>
-					<li><a ></a></li>
+					<li><a class="nItem"></a></li>
+					<li><a class="nItem"></a></li>
+					<li><a class="nItem"></a></li>
+				</ul>
+		</div>
+		<!-- 垂直导航 -->
+		<div id="vNavigator">
+				<ul>
+					<li><a class="vItem"></a></li>
+					<li><a class="vItem"></a></li>
+					<li><a class="vItem"></a></li>
 				</ul>
 		</div>
 	</div>
@@ -37,7 +46,8 @@
 	$(function(){
 		$("#easySlide").easySlide({
 			index:0,
-			hoverPause:true
+			hoverPause:true,
+			derection:'v'
 		});
 		
 		

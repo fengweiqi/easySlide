@@ -243,7 +243,7 @@ date:2014-12-07
 		    this.data('easySlide',opts);//合并变化后数据到插件
 		}
 	};
-	var privateclass;//用于私有类实例化
+	var privateclass=[];//用于私有类实例化
 	var methods = {//对外接口
 		init: function(options){
 			return this.each(function() {
@@ -251,7 +251,8 @@ date:2014-12-07
 				var opts = $this.data('easySlide');
 				if(typeof(opts) == 'undefined') {
 
-					var defaults = { 
+					var defaults = {
+							id:0, 
 						    slideTime:700,	//动画滑行速度，越大越慢
 						    autoPlay:true,	//true为自动播放，
 						    pauseTime:3000,	//动画暂停时间
@@ -293,23 +294,24 @@ date:2014-12-07
 				}
 				opts = $.extend({}, opts, runSettings);
 				$this.data('easySlide', opts);//合并参数
-				privateclass=new Privateclass($this);
-				privateclass.resize();
+				opts.id=new Date().getTime();
+				privateclass[opts.id]=new Privateclass($this);
+				privateclass[opts.id].resize();
 				// 播放上一张
 				$prev.click(function(event) {
 					
-					return privateclass.prev();
+					return privateclass[opts.id].prev();
 				});
 				// 播放下一张
 				$next.click(function(event) {
 					
-					return privateclass.next();
+					return privateclass[opts.id].next();
 				});
 
 				// 自动播放
 
 				Interval=setInterval(function(){
-					return privateclass.autoPlay();
+					return privateclass[opts.id].autoPlay();
 				},opts.pauseTime);
 
 				// 鼠标悬停
@@ -319,7 +321,7 @@ date:2014-12-07
 						clearInterval(Interval);
 					}, function() {
 						Interval = setInterval(function() {
-							return privateclass.autoPlay();
+							return privateclass[opts.id].autoPlay();
 						}, opts.pauseTime);
 					});
 
@@ -328,7 +330,7 @@ date:2014-12-07
 				// 自适应
 				if(opts.autoReSize){
 					window.onresize=function(){
-						return privateclass.resize();
+						return privateclass[opts.id].resize();
 					}
 				}
 
@@ -339,7 +341,7 @@ date:2014-12-07
 					$(this).addClass('hover');
 					var index=$navigator.find('a').index(this);
 					console.log(index);
-					return privateclass.showIndex(index);
+					return privateclass[opts.id].showIndex(index);
 				});
 
 				// 垂直导航
@@ -348,7 +350,7 @@ date:2014-12-07
 					$(this).addClass('hover');
 					var index=$vNavigator.find('.vItem').index(this);
 					console.log(index);
-					return privateclass.showIndex(index);
+					return privateclass[opts.id].showIndex(index);
 				});
 
 
@@ -358,7 +360,7 @@ date:2014-12-07
 		prev: function() {
 			return $(this).each(function() {
 				
-					privateclass.prev();
+					privateclass[opts.id].prev();
 
 			});
 			
@@ -367,7 +369,7 @@ date:2014-12-07
 		next:function(){
 			return $(this).each(function() {
 				
-					privateclass.next();
+					privateclass[opts.id].next();
 				});
 			
 			
@@ -375,7 +377,7 @@ date:2014-12-07
 		showIndex:function(index){
 			return $(this).each(function(){
 				
-					privateclass.showIndex(index);
+					privateclass[opts.id].showIndex(index);
 					
 			});
 			
