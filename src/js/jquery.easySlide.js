@@ -160,11 +160,13 @@ date:2014-12-07
 			var opts=this.opts;
 			var $autoWidth = $this.width();
 			var $autoHeight = $this.height();
-
+				
 
 			var $responsiveImage = $this.find('.responsive');
 
 			var $slideItem = $this.find('.slideItem');
+
+			    
 			var $itemLength = $slideItem.length;
 			var firstImg=$responsiveImage.get(0);
 
@@ -174,13 +176,18 @@ date:2014-12-07
 			// 设置高度
 			function setHeight(){
 				if(opts.initHeight==0){
+
 					$autoHeight = $autoWidth*opts.rate;
 					
 					
 					opts.globalHeight=$autoHeight;
 				}
-
-				$slideItem.css('height', $autoHeight);
+				if(typeof firstImg!='undefined'){
+					$slideItem.css('height', $autoHeight);
+				}
+				else{
+					$autoHeight=$slideItem.css('height');
+				}
 				$this.css({
 					height: $autoHeight
 				});
@@ -340,7 +347,7 @@ date:2014-12-07
 					$navigator.find('a').removeClass('hover');
 					$(this).addClass('hover');
 					var index=$navigator.find('a').index(this);
-					console.log(index);
+					
 					return privateclass[opts.id].showIndex(index);
 				});
 
@@ -349,7 +356,7 @@ date:2014-12-07
 					$vNavigator.find('.vItem').removeClass('hover');
 					$(this).addClass('hover');
 					var index=$vNavigator.find('.vItem').index(this);
-					console.log(index);
+					
 					return privateclass[opts.id].showIndex(index);
 				});
 
