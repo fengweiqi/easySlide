@@ -281,10 +281,10 @@ date:2014-12-07
 				var $globalHeight = $this.height();
 				var $slideItem = $this.find('.slideItem');
 				var $itemLength = $slideItem.length;
-				var $prev=$("#prev");
-				var $next=$("#next");
-				var $navigator=$("#navigator");
-				var $vNavigator=$("#vNavigator");
+				var $prev=$(this).find('.prev');
+				var $next=$(this).find(".next");
+				var $navigator=$(".navigator");
+				var $vNavigator=$(".vNavigator");
 				var slideAble = false;
 				var Interval;
 				var runSettings={//插件运行时的配置

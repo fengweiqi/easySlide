@@ -28,13 +28,13 @@ img{
 		top:50%;
 
 	}
-	#prev{
+	.prev{
 		@extend %pn;
 		left:0;
 		
 		margin-top:-$pnHeight/2;
 	}
-	#next{
+	.next{
 		@extend %pn;
 
 		margin-top:-$pnHeight/2;
@@ -42,7 +42,7 @@ img{
 	}
 
 	// 轮播条目
-	#navigator{
+	.navigator{
 		position:absolute;
 		bottom:10%;
 		left:50%;
@@ -67,7 +67,7 @@ img{
 		}
 	}
 	// 垂直轮播条目
-	#vNavigator{
+	.vNavigator{
 		position:absolute;
 		z-index: 1000;
 		right:100px;
