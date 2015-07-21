@@ -1,5 +1,6 @@
-需求：
-1、幻灯展示个数，默认为1 （未完成）
+Demand:
+1. Slide number display, default is 1 (unfinished)
+
 ##Getting Started
 you can get easySlide plugin through two ways.
 - Install:`npm install jquery-easyslide`
